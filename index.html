@@ -121,7 +121,7 @@
                         </div>
                     </fieldset>
                     <!-- Nút gửi -->
-                    <button type="submit"
+                    <button id="submitBtn" type="submit"
                         class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transform transition-all hover:scale-105 duration-300">
                         Gửi đánh giá
                     </button>
@@ -209,6 +209,15 @@
                 return;
             }
 
+            // Thêm trạng thái loading
+            const submitButton = document.getElementById("submitBtn");
+            submitButton.disabled = true;
+            submitButton.classList.add("opacity-50", "cursor-not-allowed");
+            submitButton.innerHTML = `<svg class="animate-spin h-5 w-5 mr-3 inline-block" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+        </svg> Đang gửi...`;
+
             // Nếu không có lỗi, tiến hành submit dữ liệu
             const formData = {
                 ten: name,
@@ -235,6 +244,12 @@
                 .catch((error) => {
                     console.error("Error:", error);
                     alert("Đã có lỗi xảy ra. Vui lòng thử lại sau.");
+                })
+                .finally(() => {
+                    // Khôi phục lại trạng thái ban đầu cho nút submit
+                    submitButton.disabled = false;
+                    submitButton.classList.remove("opacity-50", "cursor-not-allowed");
+                    submitButton.innerHTML = `Gửi đánh giá`;
                 });
         });
     </script>

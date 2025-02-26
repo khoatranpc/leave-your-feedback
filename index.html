@@ -54,7 +54,7 @@
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <label for="tacphong" class="block text-sm font-medium text-gray-700">
-                                    Tác phong (GV) (1-10):
+                                    Tác phong (1-10):
                                 </label>
                                 <input type="number" id="tacphong" name="tacphong" min="1" max="10" placeholder="1-10"
                                     required
@@ -63,7 +63,7 @@
                             </div>
                             <div>
                                 <label for="truyendat" class="block text-sm font-medium text-gray-700">
-                                    Truyền đạt (GV) (1-10):
+                                    Truyền đạt (1-10):
                                 </label>
                                 <input type="number" id="truyendat" name="truyendat" min="1" max="10" placeholder="1-10"
                                     required
@@ -72,15 +72,6 @@
                             </div>
                         </div>
                         <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label for="diemgiangvien" class="block text-sm font-medium text-gray-700">
-                                    Điểm GV (1-10):
-                                </label>
-                                <input type="number" id="diemgiangvien" name="diemgiangvien" min="1" max="10"
-                                    placeholder="1-10" required
-                                    class="mt-1 block w-full px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" />
-                                <p id="error-diemgiangvien" class="text-red-500 text-sm mt-1"></p>
-                            </div>
                             <div>
                                 <label for="diembaigiang" class="block text-sm font-medium text-gray-700">
                                     Điểm bài giảng (1-10):
@@ -114,7 +105,7 @@
                             <label for="feedback" class="block text-sm font-medium text-gray-700">
                                 Nội dung đánh giá:
                             </label>
-                            <textarea id="feedback" name="feedback" placeholder="Viết đánh giá của bạn tại đây..."
+                            <textarea id="feedback" name="feedback" placeholder="Đánh giá Giảng viên và Trợ giảng..."
                                 required
                                 class="mt-1 block w-full px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors resize-none h-24"></textarea>
                             <p id="error-feedback" class="text-red-500 text-sm mt-1"></p>
@@ -140,7 +131,6 @@
             const name = document.getElementById("name").value.trim();
             const tacphong = parseInt(document.getElementById("tacphong").value, 10);
             const truyendat = parseInt(document.getElementById("truyendat").value, 10);
-            const diemgiangvien = parseInt(document.getElementById("diemgiangvien").value, 10);
             const diembaigiang = parseInt(document.getElementById("diembaigiang").value, 10);
             const rating = document.getElementById("rating").value;
             const feedback = document.getElementById("feedback").value.trim();
@@ -171,15 +161,6 @@
             } else {
                 document.getElementById("error-truyendat").innerText = "";
             }
-
-            // Kiểm tra điểm giảng viên
-            if (isNaN(diemgiangvien) || diemgiangvien < 1 || diemgiangvien > 10) {
-                document.getElementById("error-diemgiangvien").innerText = "Điểm GV phải là số từ 1 đến 10.";
-                isValid = false;
-            } else {
-                document.getElementById("error-diemgiangvien").innerText = "";
-            }
-
             // Kiểm tra điểm bài giảng
             if (isNaN(diembaigiang) || diembaigiang < 1 || diembaigiang > 10) {
                 document.getElementById("error-diembaigiang").innerText = "Điểm bài giảng phải là số từ 1 đến 10.";
@@ -223,7 +204,7 @@
                 ten: name,
                 tacphong: tacphong,
                 truyendat: truyendat,
-                diemgiangvien: diemgiangvien,
+                diemgiangvien: 0,
                 diembaigiang: diembaigiang,
                 danhgiachung: rating,
                 feedback: feedback,
